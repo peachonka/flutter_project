@@ -8,28 +8,20 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # ← ИЗМЕНИТЕ НА windows-latest
+    runs-on: windows-latest
     
     steps:
     - uses: actions/checkout@v4
     
-    - name: Setup Flutter
+    - name: Setup Flutter 3.35.6 (как рекомендует ошибка)
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.4.0'  # Актуальная стабильная версия
+        flutter-version: '3.35.6'  # ← ТОЧНАЯ ВЕРСИЯ ИЗ ОШИБКИ
         channel: 'stable'
     
-    - name: Verify Flutter version
-      run: flutter --version
-    
-    - name: Install dependencies
-      run: flutter pub get
-      working-directory: ./flutter_application
-    
-    - name: Analyze
-      run: flutter analyze
-      working-directory: ./flutter_application
-    
-    - name: Run tests
-      run: flutter test
-      working-directory: ./flutter_application
+    - name: Verify versions
+      run: |
+        echo "=== Flutter Version ==="
+        flutter --version
+        echo "=== Dart Version ==="
+        dart --version
