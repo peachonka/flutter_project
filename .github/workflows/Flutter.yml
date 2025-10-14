@@ -18,11 +18,17 @@ jobs:
       with:
         flutter-version: '3.16.0'
     
+    - name: Change to Flutter project directory
+      run: cd flutter_application
+    
     - name: Install dependencies
       run: flutter pub get
+      working-directory: ./flutter_application  
     
     - name: Analyze
       run: flutter analyze
+      working-directory: ./flutter_application
     
     - name: Run tests
       run: flutter test
+      working-directory: ./flutter_application
