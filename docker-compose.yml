@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  station-service:
+    build: ./station-service
+    ports:
+      - "5001:5001"
+    container_name: metro_station_service
+    restart: unless-stopped
+    volumes:
+      - ./station-service/moscow_metro.json:/app/moscow_metro.json
+
+  alarm-trigger-service:
+    build: ./alarm-trigger-service
+    ports:
+      - "5002:5002"
+    container_name: metro_alarm_trigger_service
+    restart: unless-stopped
+    depends_on:
+      - station-service
+
+networks:
+  default:
+    name: metro_alarm_network
